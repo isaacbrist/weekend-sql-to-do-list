@@ -1,6 +1,7 @@
 $(document).ready(function () {
   console.log('jQuery sourced.');
   getToDos();
+  clickHandler();
 });
 
 function clickHandler() {
@@ -9,11 +10,11 @@ function clickHandler() {
 
 function handleSubmit() {
   console.log('Submit button clicked.');
-  let newTask = {};
+  let todos = {};
   todos.name = $('#name').val();
   todos.description = $('#description').val();
-  todos.description = $('#date').val();
-  addToDo(newTask);
+  todos.dateCreated = $('#date').val();
+  addToDo(todos);
 }
 //get request
 function getToDos() {
@@ -31,19 +32,19 @@ function getToDos() {
 }
 
 //post
-function addToDo(toDoTask) {
+function addToDo(todos) {
   $.ajax({
     type: 'POST',
     url: '/todos',
-    data: toDoTask,
+    data: todos,
   })
     .then(function (response) {
       console.log('Response from server.', response);
-      renderDOM();
+      getToDos();
     })
     .catch(function (error) {
       console.log('Error in POST', error);
-      alert('Unable to add book at this time. Please try again later.');
+      alert('Unable to add task at this time. Please try again later.');
     });
 }
 
