@@ -7,6 +7,14 @@ function clickHandler() {
   $('#submit-btn').on('click', handleSubmit);
 }
 
+function handleSubmit() {
+  console.log('Submit button clicked.');
+  let newTask = {};
+  todos.name = $('#name').val();
+  todos.description = $('#description').val();
+  todos.description = $('#date').val();
+  addToDo(newTask);
+}
 //get request
 function getToDos() {
   $.ajax({
@@ -19,6 +27,23 @@ function getToDos() {
     })
     .catch(function (error) {
       console.log('error in GET', error);
+    });
+}
+
+//post
+function addToDo(toDoTask) {
+  $.ajax({
+    type: 'POST',
+    url: '/todos',
+    data: toDoTask,
+  })
+    .then(function (response) {
+      console.log('Response from server.', response);
+      renderDOM();
+    })
+    .catch(function (error) {
+      console.log('Error in POST', error);
+      alert('Unable to add book at this time. Please try again later.');
     });
 }
 
