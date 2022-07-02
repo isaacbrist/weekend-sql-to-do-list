@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const router = require('./routes/todos.router.js');
+const router = require('./routes/tasks.router.js');
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/todos', router);
+app.use('/tasks', router);
 
 
 app.use(express.static('server/public'))
