@@ -36,4 +36,21 @@ router.post('/', (req, res) => {
     });
 });
 
+//router PUT
+router.put('/:id', (req, res) => {
+  console.log('start of router.put');
+  let queryText = 'UPDATE "to-do-table" SET "completed" = $1 WHERE id = $2;';
+  let values = [req.body.completed, req.params.id];
+  pool
+    .query(queryText, values)
+    .then((dbResponse) => {
+      res.send(dbResponse.rows);
+    })
+    .catch((error) => {
+      console.log(`Error UPDATEing with query ${queryText}: ${error}`);
+      res.sendStatus(500);
+    });
+});
+
+//router DELETE
 module.exports = router;
