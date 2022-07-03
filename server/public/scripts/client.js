@@ -7,6 +7,7 @@ $(document).ready(function () {
 function clickHandler() {
   $('#submit-btn').on('click', handleSubmit);
   $('#table').on('click', '.completed-btn', markAsComplete);
+  $('#table').on('click', '.delete-btn', deleteTask);
 }
 
 function handleSubmit() {
@@ -57,7 +58,6 @@ function markAsComplete() {
   $.ajax({
     method: 'PUT',
     url: `/tasks/${taskId}`,
-    data: {completed: !markCompleted},
   })
     .then(function () {
       getTasks();
@@ -65,6 +65,22 @@ function markAsComplete() {
     })
     .catch(function (error) {
       alert('Error in markAsCompleted:', error);
+    });
+}
+
+//DELETE
+function deleteTask() {
+  let taskId = $(this).data('id');
+  $.ajax({
+    method: 'DELETE',
+    url: `/tasks/${taskId}`,
+  })
+    .then(function (response) {
+      console.log('Deleted task!');
+      getTasks();
+    })
+    .catch(function (error) {
+      alert('error deleting:', error);
     });
 }
 //append
