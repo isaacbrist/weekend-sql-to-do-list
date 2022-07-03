@@ -6,7 +6,6 @@ const pool = require('../modules/pool');
 router.get('/', (req, res) => {
   console.log('in router.get');
   let queryText = 'SELECT * FROM "to-do-table" ORDER BY "dateCreated";';
-  'SELECT CONVERT(VARCHAR(11), GETDATE(), 101) AS [MM/DD/YYYY];';
   pool
     .query(queryText)
     .then((result) => {

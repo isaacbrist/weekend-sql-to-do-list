@@ -14,33 +14,43 @@
     </header>
     <main>
       <section>
-        <h3>Add New task</h3>
-        <label>Name:</label
-        ><input type="text" id="name" size="50" />
+        <h3>Add a New task</h3>
+        <h3><label>Name:</label></h3>
+        <input
+          type="text"
+          placeholder="Name of your task"
+          class="input-fields"
+          id="name"
+          size="50"
+        />
         <br />
-        <label>Description:</label
-        ><input type="text" id="description" size="50" />
+        <h3><label>Description:</label></h3>
+        <input
+          type="text"
+          placeholder="Description of your task"
+          class="input-fields"
+          id="description"
+          size="50"
+        />
         <br />
-        <label>Today's Date:</label
+        <!-- <label>Today's Date:</label
             ><input type="text" id="date" size="50" />
-            <br />
+            <br /> -->
         <button type="button" id="submit-btn">Submit</button>
       </section>
-      <section>
-        <div>
-          <h3>Todo list</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>List</th>
-                <th>List</th>
-                <th>List</th>
-              </tr>
-            </thead>
-            <tbody id="table"></tbody>
-          </table>
-        </div>
-      </section>
+      <div id="table-container">
+        <h3>Todo list</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Completed?</th>
+            </tr>
+          </thead>
+          <tbody id="table"></tbody>
+        </table>
+      </div>
     </main>
   </body>
 </html>

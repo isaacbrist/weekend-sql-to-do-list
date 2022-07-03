@@ -15,7 +15,7 @@ function handleSubmit() {
   let tasks = {};
   tasks.name = $('#name').val();
   tasks.description = $('#description').val();
-  tasks.dateCreated = $('#date').val();
+  // tasks.dateCreated = $('#date').val();
   addTasks(tasks);
 }
 //get request
@@ -53,7 +53,6 @@ function addTasks(tasks) {
 function markAsComplete() {
   console.log('In markAsCompleted');
   const taskId = $(this).data('id');
-  const markCompleted = $(this).data('completed');
   //PUT request
   $.ajax({
     method: 'PUT',
@@ -67,7 +66,6 @@ function markAsComplete() {
       alert('Error in markAsCompleted:', error);
     });
 }
-
 //DELETE
 function deleteTask() {
   let taskId = $(this).data('id');
@@ -75,7 +73,7 @@ function deleteTask() {
     method: 'DELETE',
     url: `/tasks/${taskId}`,
   })
-    .then(function (response) {
+    .then(function () {
       console.log('Deleted task!');
       getTasks();
     })
@@ -87,16 +85,22 @@ function deleteTask() {
 
 function renderDOM(tasks) {
   $('#table').empty();
-
+  let completedTask = 'not-completed';
   for (let i = 0; i < tasks.length; i += 1) {
     let task = tasks[i];
-    // For each task, append a new row to our table
+
+    if (task.completed === true) {
+      completedTask = 'completed';
+    }
+    // For each task, append a new row
+    // I don't want this rendered to the DOM currently.
+    //
+    // <td>${task.dateCreated}</td>
     $('#table').append(`
-        <tr>
+        <tr class='${completedTask}'>
           <td>${task.name}</td>
           <td>${task.description}</td>
           <td>${task.completed}</td>
-          <td>${task.dateCreated}</td>
           <td>
           <button data-id=${tasks[i].id}
           data-completed="completed"
@@ -107,5 +111,7 @@ function renderDOM(tasks) {
           </td>
         </tr>
       `);
+    // Reset completed task so we don't continuously render the wrong class
+    completedTask = 'not-completed';
   }
 }
