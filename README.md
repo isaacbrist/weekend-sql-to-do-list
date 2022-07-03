@@ -7,7 +7,6 @@
 - [Description](#description)
 - [Screenshots](#screenshots)
 - [Built With](#built-with)
-- [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
@@ -29,7 +28,7 @@ Deleting a Task removes it both from the front end as well as the database.
 
 ## Screenshots
 
-![Image 1](images/image-1.pngimage-1.png)
+![Image 1](images/image-1.png)
 ![Image 1](images/image-2.png)
 
 ## Built With
