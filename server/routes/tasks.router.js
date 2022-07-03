@@ -6,6 +6,7 @@ const pool = require('../modules/pool');
 router.get('/', (req, res) => {
   console.log('in router.get');
   let queryText = 'SELECT * FROM "to-do-table" ORDER BY "dateCreated";';
+  'SELECT CONVERT(VARCHAR(11), GETDATE(), 101) AS [MM/DD/YYYY];';
   pool
     .query(queryText)
     .then((result) => {
@@ -39,8 +40,9 @@ router.post('/', (req, res) => {
 //router PUT
 router.put('/:id', (req, res) => {
   console.log('start of router.put');
-  let queryText = 'UPDATE "to-do-table" SET "completed" = $1 WHERE id = $2;';
-  let values = [req.body.completed, req.params.id];
+  let queryText =
+    'UPDATE "to-do-table" SET "completed" = NOT "completed" WHERE id = $1;';
+  let values = [req.params.id];
   pool
     .query(queryText, values)
     .then((dbResponse) => {
@@ -53,4 +55,20 @@ router.put('/:id', (req, res) => {
 });
 
 //router DELETE
+
+router.delete('/:id', (req, res) => {
+  let reqId = req.params.id;
+  console.log(`Delete request sent for id ${reqId}`);
+  let queryText = 'DELETE FROM "to-do-table" WHERE id = $1;';
+  pool
+    .query(queryText, [reqId])
+    .then(() => {
+      console.log('task Deleted!');
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log(`Error deleting with query ${queryText}: ${error}`);
+      res.sendStatus(500);
+    });
+});
 module.exports = router;
