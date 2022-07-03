@@ -3,9 +3,11 @@ CREATE TABLE "to-do-table" (
     "name" VARCHAR (50) NOT NULL,
     "description" VARCHAR (300) NOT NULL,
     "completed" BOOLEAN DEFAULT FALSE,
-    "dateCreated" DATE
 );
 INSERT INTO "to-do-table" 
-	("name", "description", "dateCreated") 
+	("name", "description",) 
 VALUES 
-	('Grocery Store', 'Grab bananas, tomatoes, and milk', '2022-07-01')
+	("Grocery Store", "Grab bananas, tomatoes, and milk")
+("Dog Food"	"Get dog food")	
+("Dog Bath"	"Give the dogs a bath")
+("Vacuum"	"Vacuum living room")

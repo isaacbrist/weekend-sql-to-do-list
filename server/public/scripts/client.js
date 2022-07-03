@@ -93,9 +93,7 @@ function renderDOM(tasks) {
       completedTask = 'completed';
     }
     // For each task, append a new row
-    // I don't want this rendered to the DOM currently.
-    //
-    // <td>${task.dateCreated}</td>
+ 
     $('#table').append(`
         <tr class='${completedTask}'>
           <td>${task.name}</td>
