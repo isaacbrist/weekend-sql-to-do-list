@@ -1,8 +1,12 @@
 body{
     background-color: #b8deeb;
+    text-align: center;
+}
+#table-container{
+    margin-left: auto;
+    margin-right: auto;
     
 }
-
 .completed {
     width: 100%;
     padding: 25px;

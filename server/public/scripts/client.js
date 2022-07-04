@@ -17,6 +17,8 @@ function handleSubmit() {
   tasks.description = $('#description').val();
   // tasks.dateCreated = $('#date').val();
   addTasks(tasks);
+  tasks.name = $('#name').val('');
+  tasks.description = $('#description').val('');
 }
 //get request
 function getTasks() {
@@ -66,20 +68,28 @@ function markAsComplete() {
       alert('Error in markAsCompleted:', error);
     });
 }
+function confirmDelete() {
+  if (confirm('Are you sure you want to delete?') == true) {
+    return true;
+  }
+  return false;
+}
 //DELETE
 function deleteTask() {
-  let taskId = $(this).data('id');
-  $.ajax({
-    method: 'DELETE',
-    url: `/tasks/${taskId}`,
-  })
-    .then(function () {
-      console.log('Deleted task!');
-      getTasks();
+  if (confirmDelete()) {
+    let taskId = $(this).data('id');
+    $.ajax({
+      method: 'DELETE',
+      url: `/tasks/${taskId}`,
     })
-    .catch(function (error) {
-      alert('error deleting:', error);
-    });
+      .then(function () {
+        console.log('Deleted task!');
+        getTasks();
+      })
+      .catch(function (error) {
+        alert('error deleting:', error);
+      });
+  }
 }
 //append
 
@@ -93,7 +103,7 @@ function renderDOM(tasks) {
       completedTask = 'completed';
     }
     // For each task, append a new row
- 
+
     $('#table').append(`
         <tr class='${completedTask}'>
           <td>${task.name}</td>
